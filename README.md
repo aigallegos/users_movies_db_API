@@ -32,7 +32,7 @@
 |          | PUT     | Replace entire task with supplied task or 404 error |
 |          | DELETE  | Delete specified user or 404 error                  |
 
-**NOTE**: In addition, the API has the following JSON encoded query string parameters for the GET requests to the `users` and `tasks` endpoints:
+**NOTE**: In addition, the API has the following JSON encoded query string parameters for the GET requests to the `users` and `tasks` endpoints. You will also need to make sure the [+select+] parameter works for the `users/:id` and `tasks/:id` endpoints.:
 
 | Parameter | Description                                                                                  |
 |----------|----------------------------------------------------------------------------------------------|
