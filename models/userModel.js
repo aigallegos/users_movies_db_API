@@ -4,9 +4,9 @@ var mongoose = require('mongoose');
 // Define our user schema
 var UserSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    name: {type: String, required: true},
     email: {type: String, required: true},
-    pendingTasks: [String],
+    password: {type: String, required: true},
+    movieList: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }],
     dateCreated: {type: Date, default: Date.now}
 });
 
