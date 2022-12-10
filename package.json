@@ -7,7 +7,7 @@
     "Sujay Khandekar <khandek2@illinois.edu>"
   ],
   "scripts": {
-    "start": "nodemon --exec node server.js"
+    "start": "gulp"
   },
   "babel": {
     "presets": [
