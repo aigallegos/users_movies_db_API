@@ -35,8 +35,8 @@ router.get('/', function (req, res) {
 })
 
 router.post('/', function (req, res) {
-    if (req.body.name && req.body.pictureURL && req.body.genres) {
-        movieModel.find({name: req.body.name}, function (err, result) {
+    if (req.body.genre_ids && req.body.id && req.body.original_language && req.body.overview && req.body.poster_path && req.body.release_date && req.body.title && req.body.vote_average) {
+        movieModel.find({name: req.body.id}, function (err, result) {
             if (result.length) {
                 res.status(404).send({
                     message: 'Movie already exists in db',
@@ -44,11 +44,20 @@ router.post('/', function (req, res) {
                 })
             } else {
                 movieModel.create({
-                    _id: new mongoose.Types.ObjectId(),
-                    name: req.body.name,
-                    pictureURL: req.body.pictureURL || "",
-                    genres: req.body.genres || [],
-                    description: req.body.description || "No description"
+                    adult: req.body.adult || false,
+                    backdrop_path: req.body.backdrop_path || "",
+                    genre_ids: req.body.genre_ids || [],
+                    id: req.body.id || -1,
+                    original_language: req.body.original_language || "",
+                    original_title: req.body.original_title || "",
+                    overview: req.body.overview || "",
+                    popularity: req.body.popularity || -1,
+                    poster_path: req.body.poster_path || "",
+                    release_date: req.body.release_date || "",
+                    title: req.body.title || "",
+                    video: req.body.video || true,
+                    vote_average: req.body.vote_average || -1,
+                    vote_count: req.body.vote_count || -1,
                 }, function (err, newMovie) {
                     if (err) {
                         res.status(404).send({
@@ -88,8 +97,8 @@ router.get('/:id', function (req, res) {
     })
 })
 
-router.get('/:name', function (req, res) {
-    movieModel.findOne({name: req.params.name}, function (err, result) {
+router.get('/:id', function (req, res) {
+    movieModel.findOne({id: req.params.id}, function (err, result) {
         if (err) {
             res.status(404).send({
                 message: 'Movie Not Found',

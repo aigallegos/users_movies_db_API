@@ -6,7 +6,7 @@ var UserSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     email: {type: String, required: true},
     password: {type: String, required: true},
-    movieList: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }],
+    movieList: [mongoose.Schema.Types.Mixed],
     dateCreated: {type: Date, default: Date.now}
 });
 

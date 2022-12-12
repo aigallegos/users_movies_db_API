@@ -41,9 +41,9 @@ router.post('/', function (req, res) {
     }
 })
 
-router.put('/:id', function (req, res) {
-    if (req.params.id && req.body.movieList) {
-        users.findOneAndUpdate({_id: req.params.id}, {movieList: req.body.movieList}, {new: true}, function (err, result) {
+router.put('/:email', function (req, res) {
+    if (req.params.email && req.body.movieList) {
+        users.findOneAndUpdate({email: req.params.email}, {password: 0}, {movieList: req.body.movieList}, {new: true}, function (err, result) {
             if (err) {
                 res.status(404).send({
                     message: 'User not found',
@@ -65,8 +65,8 @@ router.put('/:id', function (req, res) {
 })
 
 router.get('/:email', function (req, res) {
-    if (req.params.email) {
-        users.findOne({email: req.params.email}, function (err, user) {
+    if (req.params.email && req.body.password) {
+        users.findOne({email: req.params.email, password: req.body.password}, {password: 0}, function (err, user) {
             if (err) {
                 res.status(404).send({
                     message: 'User Not Found',
@@ -80,7 +80,7 @@ router.get('/:email', function (req, res) {
                     })
                 } else {
                     res.status(401).send({
-                        message: 'Invalid Email',
+                        message: 'Invalid Email & Password Combination',
                         data: {}
                     })
                 }
