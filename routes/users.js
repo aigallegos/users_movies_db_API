@@ -43,16 +43,23 @@ router.post('/', function (req, res) {
 
 router.put('/:email', function (req, res) {
     if (req.params.email && req.body.movieList) {
-        users.findOneAndUpdate({email: req.params.email}, {password: 0}, {movieList: req.body.movieList}, {new: true}, function (err, result) {
+        users.findOneAndUpdate({email: req.params.email}, {movieList: req.body.movieList}, function (err, result) {
             if (err) {
                 res.status(404).send({
                     message: 'User not found',
                     data: {}
                 })
+            } else if (!result) {
+                res.status(404).send({
+                    message: 'User not found',
+                    data: {}
+                })
             } else {
-                res.status(200).send({
-                    message: 'Successfully updated User',
-                    data: result
+                users.findOne({email: req.params.email}, {password: 0}, function (err, user) {
+                    res.status(200).send({
+                        message: 'Successfully updated User',
+                        data: user
+                    })
                 })
             }
         })
