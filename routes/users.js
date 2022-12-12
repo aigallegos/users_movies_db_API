@@ -64,9 +64,9 @@ router.put('/:email', function (req, res) {
     }
 })
 
-router.get('/:email', function (req, res) {
-    if (req.params.email && req.body.password) {
-        users.findOne({email: req.params.email, password: req.body.password}, {password: 0}, function (err, user) {
+router.post('/email', function (req, res) {
+    if (req.body.email && req.body.password) {
+        users.findOne({email: req.body.email, password: req.body.password}, {password: 0}, function (err, user) {
             if (err) {
                 res.status(404).send({
                     message: 'User Not Found',
